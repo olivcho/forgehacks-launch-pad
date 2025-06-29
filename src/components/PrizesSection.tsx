@@ -14,7 +14,7 @@ const PrizesSection = () => {
                 <div className="w-20 h-20 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center mb-8 mx-auto">
                   <Zap className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-3xl font-bold text-white mb-6">Fast-tracked interviews with Composite + cash prizes</h3>
+                <h3 className="text-3xl font-bold text-white mb-6">Fast-tracked interviews with <a href="https://composite.com" target="_blank" rel="noopener noreferrer" className="text-yellow-400 hover:text-yellow-300 transition-colors">Composite</a> + cash prizes</h3>
                 <p className="text-xl text-gray-300 leading-relaxed">
                   Winners get direct access to opportunities with our sponsor partners and cash rewards to celebrate your innovation and hard work.
                 </p>

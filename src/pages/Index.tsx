@@ -19,7 +19,7 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-yellow-900 to-slate-900">
       <HeroSection timeLeft={timeLeft} />
       <RegistrationSection />
-      <SponsorsSection />
+      {/* <SponsorsSection /> */}
       <PrizesSection />
       <LocationSection />
       <TracksSection />
