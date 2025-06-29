@@ -1,13 +1,12 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Calendar, Clock, Users, Zap, Heart, MapPin, Mail } from "lucide-react";
 
 const Index = () => {
   const [currentWord, setCurrentWord] = useState(0);
-  const [currentSponsor, setCurrentSponsor] = useState(0);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -41,14 +40,6 @@ const Index = () => {
     }, 2000);
     return () => clearInterval(interval);
   }, []);
-
-  // Rotating sponsors effect
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSponsor((prev) => (prev + 1) % sponsors.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [sponsors.length]);
 
   // Countdown timer
   useEffect(() => {
@@ -221,18 +212,27 @@ const Index = () => {
           <div className="max-w-4xl mx-auto animate-slide-up">
             <h2 className="text-3xl font-bold text-white text-center mb-8">Our Sponsors</h2>
             <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-              <div className="text-center">
-                <div className="mb-6">
-                  <img 
-                    key={currentSponsor}
-                    src={sponsors[currentSponsor].logo} 
-                    alt={sponsors[currentSponsor].name}
-                    className="w-48 h-24 mx-auto object-contain rounded-lg animate-fade-in"
-                  />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4">{sponsors[currentSponsor].name}</h3>
-                <p className="text-gray-300">Thank you to our amazing sponsors for making ForgeHacks possible!</p>
-              </div>
+              <Carousel className="w-full max-w-2xl mx-auto">
+                <CarouselContent>
+                  {sponsors.map((sponsor, index) => (
+                    <CarouselItem key={index}>
+                      <div className="text-center">
+                        <div className="mb-6">
+                          <img 
+                            src={sponsor.logo} 
+                            alt={sponsor.name}
+                            className="w-48 h-24 mx-auto object-contain rounded-lg"
+                          />
+                        </div>
+                        <h3 className="text-2xl font-bold text-white mb-4">{sponsor.name}</h3>
+                        <p className="text-gray-300">Thank you to our amazing sponsors for making ForgeHacks possible!</p>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="text-white border-white/20 hover:bg-white/10" />
+                <CarouselNext className="text-white border-white/20 hover:bg-white/10" />
+              </Carousel>
             </div>
           </div>
         </div>
@@ -243,18 +243,18 @@ const Index = () => {
         <div className="container mx-auto px-6">
           <div className="animate-slide-up">
             <h2 className="text-4xl font-bold text-white text-center mb-12">Prizes & Opportunities</h2>
-            <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              {prizes.map((prize, index) => (
-                <Card key={index} className="bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105">
-                  <CardContent className="p-8">
-                    <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${prize.gradient} flex items-center justify-center mb-6`}>
-                      <Zap className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-white mb-4">{prize.title}</h3>
-                    <p className="text-gray-300 leading-relaxed">{prize.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
+            <div className="max-w-4xl mx-auto">
+              <Card className="bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10 transition-all duration-300">
+                <CardContent className="p-12 text-center">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center mb-8 mx-auto">
+                    <Zap className="w-10 h-10 text-white" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-white mb-6">Fast-tracked interviews with Composite + cash prizes</h3>
+                  <p className="text-xl text-gray-300 leading-relaxed">
+                    Winners get direct access to opportunities with our sponsor partners and cash rewards to celebrate your innovation and hard work.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
